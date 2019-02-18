@@ -13,3 +13,6 @@ out/
 /mvnw.*
 /mvnw
 /.mvn
+/innerfiles/
+datagen.xml
+/.vertx/

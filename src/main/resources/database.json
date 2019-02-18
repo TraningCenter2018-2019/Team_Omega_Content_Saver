@@ -1,0 +1,5 @@
+{
+  "userName": "username",
+  "password": "password",
+  "url": "jdbc:postgresql://localhost:5432/contentlinks"
+}
