@@ -8,7 +8,7 @@ import com.nc.contentsaver.processes.managing.manager.link.DataLinkManager;
 /**
  * Builder. Allows you to create an object that can save content and information about it.
  */
-public class DataSaverBuilder {
+public class DataManagerBuilder {
     /**
      * An object that can save content data.
      */
@@ -24,7 +24,7 @@ public class DataSaverBuilder {
      * @param dataLinkManager implementation of the content data storage interface
      * @return data saver builder
      */
-    public DataSaverBuilder setDataLinkManager(DataLinkManager dataLinkManager) {
+    public DataManagerBuilder setDataLinkManager(DataLinkManager dataLinkManager) {
         this.dataLinkManager = dataLinkManager;
         return this;
     }
@@ -35,7 +35,7 @@ public class DataSaverBuilder {
      * @param dataBufferManager implementation of the save content interface
      * @return data saver builder
      */
-    public DataSaverBuilder setDataBufferManager(DataBufferManager dataBufferManager) {
+    public DataManagerBuilder setDataBufferManager(DataBufferManager dataBufferManager) {
         this.dataBufferManager = dataBufferManager;
         return this;
     }

@@ -2,7 +2,7 @@ package com.nc.contentsaver;
 
 import com.nc.contentsaver.processes.managing.databaseutils.DatabaseCredentials;
 import com.nc.contentsaver.processes.managing.manager.DataManager;
-import com.nc.contentsaver.processes.managing.manager.DataSaverBuilder;
+import com.nc.contentsaver.processes.managing.manager.DataManagerBuilder;
 import com.nc.contentsaver.verticles.ServerSettings;
 
 import java.util.logging.Logger;
@@ -28,9 +28,9 @@ public final class StartPoint {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        DataManager saver = new DataSaverBuilder().buildDefault();
+        DataManager dataManager = new DataManagerBuilder().buildDefault();
         ContentSaverConfig config = getContentSaverConfigFromArgs(args);
-        new ContentSaver(saver, config);
+        new ContentSaver(dataManager, config);
     }
 
     /**
