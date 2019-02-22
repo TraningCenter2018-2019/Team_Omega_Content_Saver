@@ -14,6 +14,8 @@ It takes the following command line arguments:
 ###### Server settings:
 * `server.port=srvPort` - where `srvPort` is the port on which the server will be deployed (default is 1502).
 
+**Important**: If you use the command line parameters to transfer data to connect to the database, then it should be *all three parameters*.
+
 It is also possible to customize ways to save content and information about the content. To start the server, you must create an object of class `com.nc.contentsaver.ContentSaver`, which is required argument interface object `com.nc.contentsaver.processes.managing.manager.DataManager`. To implement this interface, use the builder `com.nc.contentsaver.processes.managing.manager.DataManagerBuilder` - it will allow you to work with the data as you want it.
 
 ### Interaction with the server:
