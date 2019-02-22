@@ -7,11 +7,31 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+/**
+ * The class describes an object that can save files to disk.
+ */
 public class DataBufferToFileSaver implements DataBufferSaver {
-    private static String DEFAULT = "innerfiles/";
+    /**
+     * Logger. Displays information about saving a file to disk.
+     */
+    private static final Logger LOG = Logger.getLogger(DataBufferToFileSaver.class.getSimpleName());
+    /**
+     * Default folder to save content to.
+     */
+    private static final String DEFAULT = "innerfiles/";
+    /**
+     * Folder to save content to.
+     */
     private File folder;
 
+    /**
+     * Creates an object that allows you to save content to a folder specified by the user.
+     *
+     * @param folderPath folder to save content to
+     */
     public DataBufferToFileSaver(String folderPath) {
         this.folder = new File(folderPath);
         try {
@@ -19,14 +39,16 @@ public class DataBufferToFileSaver implements DataBufferSaver {
                 Files.createDirectory(Paths.get(folder.getPath()));
             }
         } catch (IOException e) {
-            System.out.println("Не удалось создать папку");
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, "Не удалось создать папку", e);
         }
         if (folder.isFile()) {
             throw new IllegalArgumentException("Указанный путь принадлежит файлу, а не папке!");
         }
     }
 
+    /**
+     * Creates an object that allows you to save content to the {@link #DEFAULT} folder.
+     */
     public DataBufferToFileSaver() {
         this(DEFAULT);
     }
@@ -34,9 +56,9 @@ public class DataBufferToFileSaver implements DataBufferSaver {
     @Override
     public void saveBuffer(Buffer buffer, String hash) throws IOException {
         File file = Files.createFile(Paths.get(folder.getPath(), hash)).toFile();
-        try (FileOutputStream fos = new FileOutputStream(file)){
+        try (FileOutputStream fos = new FileOutputStream(file)) {
             fos.write(buffer.getBytes());
         }
-        System.out.println("Данные контента сохранены на диск!");
+        LOG.fine("Данные контента сохранены на диск!");
     }
 }

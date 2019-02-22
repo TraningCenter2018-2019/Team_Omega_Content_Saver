@@ -1,8 +1,20 @@
 package com.nc.contentsaver.processes.saving.databaseutils;
 
+/**
+ * The class describes the data to connect to the database.
+ */
 public class DatabaseCredentials {
+    /**
+     * Username to connect to the database.
+     */
     private String userName;
+    /**
+     * Password to connect to the database.
+     */
     private String password;
+    /**
+     * JDBC-url to connect to the database.
+     */
     private String url;
 
     public String getUserName() {

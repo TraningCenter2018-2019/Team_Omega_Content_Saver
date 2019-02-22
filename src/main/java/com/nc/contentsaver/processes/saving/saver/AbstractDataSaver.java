@@ -9,12 +9,30 @@ import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.NoSuchElementException;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+/**
+ * The class describes an object that implements the "DataSaver" interface.
+ */
 class AbstractDataSaver implements DataSaver {
+    /**
+     * Logger. To log exceptions.
+     */
+    private static final Logger LOG = Logger.getLogger(AbstractDataSaver.class.getSimpleName());
+    /**
+     * An object that can save data of saved content.
+     */
     private DataLinkSaver dataLinkSaver;
+    /**
+     * An object that can save content.
+     */
     private DataBufferSaver dataBufferSaver;
 
-    public AbstractDataSaver() {
+    /**
+     * Creates an object that implements the DataSaver interface.
+     */
+    AbstractDataSaver() {
         AMQP.getInstance().addObserver(this);
     }
 
@@ -42,7 +60,7 @@ class AbstractDataSaver implements DataSaver {
         } catch (FileAlreadyExistsException ignored) {
             //ignored
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, "Ошибка сохранения контента", e);
         }
         this.dataLinkSaver.markAsSaved(data.getDataLinkObject());
     }
@@ -51,7 +69,8 @@ class AbstractDataSaver implements DataSaver {
     public void update(Observable o, Object arg) {
         try {
             saveData(AMQP.getInstance().getData());
-        } catch (NoSuchElementException ignored) {
+        } catch (NoSuchElementException e) {
+            LOG.log(Level.WARNING, "Элемент не был получен из очереди", e);
         }
     }
 }

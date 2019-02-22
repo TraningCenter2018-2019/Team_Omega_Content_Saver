@@ -1,6 +1,13 @@
 package com.nc.contentsaver.verticles;
 
-public class ServerProperties {
+/**
+ * The class describes the server settings.
+ */
+public class ServerSettings {
+    /**
+     * Server port.
+     * The default is unavailable port.
+     */
     private int port = -1;
 
     public int getPort() {
