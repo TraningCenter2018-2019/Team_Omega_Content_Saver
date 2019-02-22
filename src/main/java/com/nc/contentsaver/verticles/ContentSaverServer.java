@@ -2,7 +2,10 @@ package com.nc.contentsaver.verticles;
 
 import com.google.gson.Gson;
 import com.nc.contentsaver.processes.linking.DataLinkObject;
+import com.nc.contentsaver.processes.managing.AMQP;
+import com.nc.contentsaver.processes.managing.manager.DataManager;
 import com.nc.contentsaver.utils.ResourceManager;
+import com.nc.contentsaver.verticles.get.ContentGetter;
 import com.nc.contentsaver.verticles.handlers.BufferHandler;
 import com.nc.contentsaver.verticles.put.PutFileLinkGetter;
 import com.nc.contentsaver.verticles.put.handlers.PutSaveDataHandler;
@@ -28,6 +31,21 @@ import java.util.logging.Logger;
  */
 public class ContentSaverServer extends AbstractVerticle {
     /**
+     * An object that allows you to save and retrieve content.
+     */
+    private DataManager dataManager;
+
+    /**
+     * Creates content saver.
+     *
+     * @param dataManager an object that allows you to save and retrieve content
+     */
+    public ContentSaverServer(DataManager dataManager) {
+        this.dataManager = dataManager;
+        AMQP.getInstance().addObserver(dataManager);
+    }
+
+    /**
      * Logger Displays service information about the status of the server.
      */
     private static final Logger LOG = Logger.getLogger(ContentSaverServer.class.getSimpleName());
@@ -40,6 +58,9 @@ public class ContentSaverServer extends AbstractVerticle {
             Buffer body = Buffer.buffer();
             switch (request.method()) {
                 case GET:
+                    String link = request.path().substring(1);
+                    new ContentGetter(link, dataManager).response(request.response());
+                    request.connection().close();
                     break;
                 case PUT:
                     DataLinkObject entity = new PutFileLinkGetter(request).returnFileLinkToClient();
@@ -56,7 +77,7 @@ public class ContentSaverServer extends AbstractVerticle {
 
         int port = getServerProperties().getPort();
         server.listen(port);
-        LOG.log(Level.INFO,  "Создан http-сервер [port:{0}]!", Integer.toString(port));
+        LOG.log(Level.INFO, "Created http-server [port:{0}]!", Integer.toString(port));
     }
 
     /**

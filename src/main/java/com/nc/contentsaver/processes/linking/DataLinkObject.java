@@ -21,6 +21,12 @@ public class DataLinkObject {
     private String sha256;
 
     /**
+     * A flag indicating whether the file has been saved.
+     */
+    @Expose(serialize = false, deserialize = false)
+    private boolean saved;
+
+    /**
      * Creates an object that will contain a link to the file and the file hash.
      *
      * @param publicLink link to the file
@@ -43,5 +49,13 @@ public class DataLinkObject {
 
     public void setSha256(String sha256) {
         this.sha256 = sha256;
+    }
+
+    public boolean isSaved() {
+        return saved;
+    }
+
+    public void setSaved(boolean saved) {
+        this.saved = saved;
     }
 }

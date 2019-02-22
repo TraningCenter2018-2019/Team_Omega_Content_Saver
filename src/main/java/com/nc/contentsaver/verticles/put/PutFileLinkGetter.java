@@ -47,7 +47,7 @@ public class PutFileLinkGetter {
                 .add(HttpHeaders.CONTENT_TYPE, "application/json")
                 .add(HttpHeaders.CONTENT_ENCODING, StandardCharsets.UTF_8.name())
                 .add(HttpHeaders.CONTENT_LENGTH, json.length() + "");
-        LOG.info("Возвращаем ссылку на файл клиенту");
+        LOG.info("We return the link to the file to the client.");
         request.response().write(Buffer.buffer(json));
         return linkToData;
     }

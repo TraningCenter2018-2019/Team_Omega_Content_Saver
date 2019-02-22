@@ -2,7 +2,7 @@ package com.nc.contentsaver.verticles.put.handlers;
 
 import com.nc.contentsaver.processes.linking.DataLinkBufferObject;
 import com.nc.contentsaver.processes.linking.DataLinkObject;
-import com.nc.contentsaver.processes.saving.AMQP;
+import com.nc.contentsaver.processes.managing.AMQP;
 import com.nc.contentsaver.utils.Hasher;
 import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;

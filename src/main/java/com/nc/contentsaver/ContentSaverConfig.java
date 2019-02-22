@@ -1,6 +1,6 @@
 package com.nc.contentsaver;
 
-import com.nc.contentsaver.processes.saving.databaseutils.DatabaseCredentials;
+import com.nc.contentsaver.processes.managing.databaseutils.DatabaseCredentials;
 import com.nc.contentsaver.verticles.ServerSettings;
 
 /**

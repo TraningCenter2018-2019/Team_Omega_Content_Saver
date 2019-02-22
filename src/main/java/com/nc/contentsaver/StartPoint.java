@@ -1,8 +1,8 @@
 package com.nc.contentsaver;
 
-import com.nc.contentsaver.processes.saving.databaseutils.DatabaseCredentials;
-import com.nc.contentsaver.processes.saving.saver.DataSaver;
-import com.nc.contentsaver.processes.saving.saver.DataSaverBuilder;
+import com.nc.contentsaver.processes.managing.databaseutils.DatabaseCredentials;
+import com.nc.contentsaver.processes.managing.manager.DataManager;
+import com.nc.contentsaver.processes.managing.manager.DataSaverBuilder;
 import com.nc.contentsaver.verticles.ServerSettings;
 
 import java.util.logging.Logger;
@@ -28,7 +28,7 @@ public final class StartPoint {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        DataSaver saver = new DataSaverBuilder().buildDefault();
+        DataManager saver = new DataSaverBuilder().buildDefault();
         ContentSaverConfig config = getContentSaverConfigFromArgs(args);
         new ContentSaver(saver, config);
     }
@@ -105,7 +105,7 @@ public final class StartPoint {
                     }
                     serverSettings.setPort(iPort);
                 } catch (NumberFormatException e) {
-                    LOG.warning("Порт сервера указан некорректно, будет использован порт по умолчанию");
+                    LOG.warning("The server port is incorrect, the default port will be used.");
                 }
             }
         }
